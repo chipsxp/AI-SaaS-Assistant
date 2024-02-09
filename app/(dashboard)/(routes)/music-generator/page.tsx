@@ -3,10 +3,10 @@
 import * as z from 'zod';
 import { useRouter } from 'next/navigation';
 import { Heading } from '@/components/heading';
-import { MessageSquare } from 'lucide-react';
+import { Music } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Form, FormField, FormItem, FormControl, } from '@/components/ui/form';
-import { conversationFormSchema } from './constants';
+import { musicFormSchema } from './constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -16,37 +16,30 @@ import OpenAI  from 'openai';
 import Empty from '@/components/empty';
 import Loader from '@/components/loader';
 import { cn } from '@/lib/utils';
-import { UserAvatar } from '@/components/user-avatar';
-import { BotAvatar } from '@/components/bot-avatar';
 
 
 
-const ConversationPage = () => {
+const MusicSoundPage = () => {
   
   const router = useRouter();
 
-  const [messages, setMessages] = useState<OpenAI.ChatCompletionMessage[]>([]);
+  const [music, setMusic] = useState<string[]>([]);
 
-  const form=useForm<z.infer<typeof conversationFormSchema>> ({
-    resolver: zodResolver(conversationFormSchema),
+  const form=useForm<z.infer<typeof musicFormSchema>> ({
+    resolver: zodResolver(musicFormSchema),
     defaultValues: {
       prompt: "",
     },
 });
 
 const isLoading = form.formState.isSubmitting;
-
-const onSubmit = async (formData: z.infer<typeof conversationFormSchema>) => {
+ 
+const onSubmit = async (formData: z.infer<typeof musicFormSchema>) => {
       try {
-        const userMessage: OpenAI.ChatCompletionMessage = {
-          role: "assistant",
-          content: formData.prompt,
-        };
-        const newMessages = [...messages, userMessage];
-        const response = await axios.post("/api/conversation", {
-          messages: newMessages,
-        });
-        setMessages((current) => [...current, userMessage, ...response.data]);
+      setMusic(undefined);
+        
+        const response = await axios.post("/api/music-generator", values);
+        setMusic(response.data.audio);
         form.reset();
       } catch (error: any) {
         // TODO: handle error Pro Model
@@ -59,11 +52,11 @@ const onSubmit = async (formData: z.infer<typeof conversationFormSchema>) => {
 
   return (
     <div>
-      <Heading title="AI Conversation" 
-      description="AI Office Assistant Conversation" 
-      icon={MessageSquare} 
-      iconColor="text-violet-700" 
-      iconBgColor="bg-violet-700/10" 
+      <Heading title="AI Sound Music Generator" 
+      description="AI Office Assistant Music Generation" 
+      icon={Music} 
+      iconColor="text-emerald-700" 
+      iconBgColor="bg-emerald-700/10" 
       />
       <div className='px-4 lg:px-8'>
         <Form {...form}>
@@ -75,7 +68,7 @@ const onSubmit = async (formData: z.infer<typeof conversationFormSchema>) => {
                 <FormControl className='m=0 p-0'>
                   <Input className='border-0 outline-none focus-visible:ring-0
                   focus-visible:ring-transparent' disabled={isLoading} 
-                  placeholder='Type a question or ideas here' {...field} />
+                  placeholder='Jazz guitar BB King' {...field} />
                 </FormControl>
               </FormItem>
             )} 
@@ -91,21 +84,15 @@ const onSubmit = async (formData: z.infer<typeof conversationFormSchema>) => {
             <Loader />
           </div>
         )}
-        {messages.length === 0 && !isLoading &&(
-          <Empty label='Start a conversation'/>
+        {music && !isLoading &&(
+          <Empty label='No music or sound generated'/>
         )}
           <div className='flex flex-col-reverse gap-y-4 '>
-            {messages.map((message, index) => (
-              <div key={index} className={cn('w-full p-8 rounded-lg flex items-start gap-x-8', 
-              message.role === "assistant" ? "bg-white border border-zinc-800/10" : "bg-muted")}>
-                {message.role === "assistant" ? <UserAvatar /> : <BotAvatar />}
-                <p className='text-sm'>{message.content}</p>
-              </div>
-            ))};
+            Music will be here
           </div>
       </div>
     </div>
   )
 }
 
-export default ConversationPage
+export default MusicSoundPage

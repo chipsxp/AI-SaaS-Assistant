@@ -123,7 +123,7 @@ const onSubmit = async (formData: z.infer<typeof imageFormSchema>) => {
                 )} 
               />
 
-            <Button className="col-span-12 lg:col-span-2 w-full" 
+            <Button className="col-span-4 lg:col-span-3 w-full" 
             type="submit" disabled={isLoading}>Generate Response</Button>
           </form>
         </Form>        

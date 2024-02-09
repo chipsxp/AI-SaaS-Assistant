@@ -38,7 +38,7 @@ const tools = [
   {
     label: 'Music Generation',
     icon: Music,
-    href: '/music-generation',
+    href: '/music-generator',
     color: 'text-emerald-700',
     bgColor: 'bg-emerald-700/10'
   },
