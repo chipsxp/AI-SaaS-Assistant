@@ -3,10 +3,10 @@
 import * as z from 'zod';
 import { useRouter } from 'next/navigation';
 import { Heading } from '@/components/heading';
-import { Music } from 'lucide-react';
+import { VideoIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Form, FormField, FormItem, FormControl, } from '@/components/ui/form';
-import { musicFormSchema } from './constants';
+import { videoFormSchema } from './constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -16,14 +16,14 @@ import Empty from '@/components/empty';
 import Loader from '@/components/loader';
 
 
-const MusicSoundPage = () => {
+const VideoMotionPage = () => {
   
   const router = useRouter();
 
-  const [music, setMusic] = useState<string>();
+  const [video, setVideo] = useState<string>();
 
-  const form=useForm<z.infer<typeof musicFormSchema>> ({
-    resolver: zodResolver(musicFormSchema),
+  const form=useForm<z.infer<typeof videoFormSchema>> ({
+    resolver: zodResolver(videoFormSchema),
     defaultValues: {
       prompt: "",
     },
@@ -31,12 +31,12 @@ const MusicSoundPage = () => {
 
 const isLoading = form.formState.isSubmitting;
  
-const onSubmit = async (formData: z.infer<typeof musicFormSchema>) => {
+const onSubmit = async (formData: z.infer<typeof videoFormSchema>) => {
       try {
-      setMusic(undefined);
+      setVideo(undefined);
         
-        const response = await axios.post("/api/music-generator", formData);
-        setMusic(response.data.audio);
+        const response = await axios.post("/api/video-generator", formData);
+        setVideo(response.data[0]);
         form.reset();
       } catch (error: any) {
         // TODO: handle error Pro Model
@@ -49,11 +49,11 @@ const onSubmit = async (formData: z.infer<typeof musicFormSchema>) => {
 
   return (
     <div>
-      <Heading title="AI Sound Music Generator" 
-      description="AI Office Assistant Music Generation" 
-      icon={Music} 
-      iconColor="text-emerald-700" 
-      iconBgColor="bg-emerald-700/10" 
+      <Heading title="AI Motion Video Generator" 
+      description="AI Office Assistant Video Generation" 
+      icon={VideoIcon} 
+      iconColor="text-orange-700" 
+      iconBgColor="bg-orange-700/10" 
       />
       <div className='px-4 lg:px-8'>
         <Form {...form}>
@@ -65,7 +65,7 @@ const onSubmit = async (formData: z.infer<typeof musicFormSchema>) => {
                 <FormControl className='m=0 p-0'>
                   <Input className='border-0 outline-none focus-visible:ring-0
                   focus-visible:ring-transparent' disabled={isLoading} 
-                  placeholder='Jazz guitar BB King' {...field} />
+                  placeholder='A horse galloping through the clouds' {...field} />
                 </FormControl>
               </FormItem>
             )} 
@@ -81,14 +81,14 @@ const onSubmit = async (formData: z.infer<typeof musicFormSchema>) => {
             <Loader />
           </div>
         )}
-        {music && !isLoading &&(
-          <Empty label='No music or sound generated'/>
+        {video && !isLoading &&(
+          <Empty label='No motion video generated'/>
         )}
           {
-            music && (
-              <audio controls className='w-full mt-8'>
-                <source src={music} type="audio/mp3" />
-              </audio>
+            video && (
+              <video controls className='w-full aspect-video mt-8 rounded-lg border-1 bg-black'>
+                <source src={video} />
+              </video>
             )
           }
       </div>
@@ -96,4 +96,4 @@ const onSubmit = async (formData: z.infer<typeof musicFormSchema>) => {
   )
 }
 
-export default MusicSoundPage
+export default VideoMotionPage
