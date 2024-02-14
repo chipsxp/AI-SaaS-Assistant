@@ -26,6 +26,8 @@ export async function POST(
         {
             input: {
             prompt: prompt,
+            num_frames: 60,
+            fps: 15,
             }
         }
         );
