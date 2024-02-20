@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
+import { addTrialCount, checkTrialLimit } from "@/lib/trialcounts";
 
 
 const openai = new OpenAI({
@@ -35,11 +36,18 @@ export async function POST(
                 return new NextResponse('resolution is required', { status: 400 });
             }
 
+            const freeTrail = await checkTrialLimit();
+            if (!freeTrail) {
+                return new NextResponse('Trial limit reached', { status: 403 });
+            }
+
             const imageCompletion = await openai.images.generate ({
                 prompt,
                 n: parseInt(amount,10),
                 size: resolution,
                 });
+
+            await addTrialCount();
 
             return NextResponse.json(imageCompletion.data[0].url);
 

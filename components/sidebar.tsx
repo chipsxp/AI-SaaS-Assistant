@@ -4,7 +4,7 @@
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import { TrialCounter } from './trial-counter';
 import { Montserrat } from 'next/font/google';
 import { CodeIcon, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, VideoIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -53,9 +53,20 @@ const routes = [
         href: '/settings',
         color: 'text-yellow-400'
     },
-]
+];
 
-const SideBar = () => {
+interface SidebarProps {
+    apiLimitCount: number;
+    
+};
+
+export const SideBar = ({
+    apiLimitCount = 0,
+    
+}: {
+    apiLimitCount: number;
+    
+}) => {
     const highLighter =usePathname();
 
   return (
@@ -82,8 +93,10 @@ const SideBar = () => {
                     ))}
             </div>
         </div>
+        <TrialCounter
+        apiLimitCount={apiLimitCount}
+        />
     </div>
     );  
 }
 
-export default SideBar
