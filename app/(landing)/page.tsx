@@ -7,7 +7,7 @@ const SplashPage = () => {
       <h1 className="text-3xl font-bold underline">
         Landing Splash Page AI Saas!
       </h1>
-      <div>
+    <div>
         <Button asChild>
           <Link href="/sign-up">Register</Link>
         </Button>

@@ -14,10 +14,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import Empty from '@/components/empty';
 import Loader from '@/components/loader';
+import { useProModalPopup } from '@/hooks/pro-modal-popup';
 
 
 const MusicSoundPage = () => {
-  
+  const proModal=useProModalPopup();
   const router = useRouter();
 
   const [music, setMusic] = useState<string>();
@@ -39,8 +40,9 @@ const onSubmit = async (formData: z.infer<typeof musicFormSchema>) => {
         setMusic(response.data.audio);
         form.reset();
       } catch (error: any) {
-        // TODO: handle error Pro Model
-        console.error(error);
+        if (error?.response?.status === 403) {
+          proModal.onOpen();
+        }
         form.setError("root", { message: "Error submitting form" });
       } finally {
         router.refresh();

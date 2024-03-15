@@ -18,9 +18,11 @@ import Empty from '@/components/empty';
 import Loader from '@/components/loader';
 import { Card, CardFooter } from '@/components/ui/card';
 import Image from 'next/image';
+import { useProModalPopup } from '@/hooks/pro-modal-popup';
 
 
 const ImagePage = () => {
+  const proModal = useProModalPopup();
   const router = useRouter();
 
   const [images, setImages] = useState<string[]>([]);
@@ -48,8 +50,9 @@ const onSubmit = async (formData: z.infer<typeof imageFormSchema>) => {
         form.reset();
 
       } catch (error: any) {
-        // TODO: handle error Pro Model
-        console.error(error);
+        if (error?.response?.status === 403) {
+          proModal.onOpen();
+        }
         form.setError("root", { message: "Error submitting form" });
       } finally {
         router.refresh();

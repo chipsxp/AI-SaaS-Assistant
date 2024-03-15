@@ -18,11 +18,12 @@ import Loader from '@/components/loader';
 import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/user-avatar';
 import { BotAvatar } from '@/components/bot-avatar';
+import { useProModalPopup } from '@/hooks/pro-modal-popup';
 
 
 
 const ConversationPage = () => {
-  
+  const proModal = useProModalPopup();
   const router = useRouter();
 
   const [messages, setMessages] = useState<OpenAI.ChatCompletionMessage[]>([]);
@@ -49,8 +50,9 @@ const onSubmit = async (formData: z.infer<typeof conversationFormSchema>) => {
         setMessages((current) => [...current, userMessage, ...response.data]);
         form.reset();
       } catch (error: any) {
-        // TODO: handle error Pro Model
-        console.error(error);
+        if (error?.response?.status === 403) {
+          proModal.onOpen();
+        }
         form.setError("root", { message: "Error submitting form" });
       } finally {
         router.refresh();
