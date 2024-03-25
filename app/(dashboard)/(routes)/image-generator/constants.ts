@@ -3,13 +3,13 @@ import * as z from 'zod';
 export const imageFormSchema = z.object({
     prompt: z.string().min(1, { 
         message: 'Iamge description prompt is required',
-     }),
-     amount: z.string().min(1, {
+    }),
+    amount: z.string().min(1, {
         message: 'Image amount is required',
-     }),
-     resolution: z.string().min(1, {
+    }),
+    resolution: z.string().min(1, {
         message: 'Image resolution is required',
-     })
+    })
 });
 
 export const amountOptions=[
