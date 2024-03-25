@@ -18,3 +18,12 @@ model UserApiLimit {
   createdAt DateTime @default(now())
   updateAt DateTime @updatedAt
 }
+
+model UserProSubsribe {
+  id String @id @default(cuid())
+  userID String @unique
+  stripeCustomerId String? @unique @map(name:"stripe_customer_id") 
+  stripeSubscribeId String @unique @map(name:"stripe_subscribe_id")
+  stripePriceValue String @map(name:"stripe_price_value")
+  stripeDurationTime DateTime @map(name:"stripe_duration_time")
+}
