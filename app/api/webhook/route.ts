@@ -13,7 +13,7 @@ export async function POST(req: Request) {
         event = stripe.webhooks.constructEvent(
             body,
             signature,
-            process.env.STRIPE_WEBHOOK_SECRET!
+            process.env.STRIPE_WEBHOOK_SECRET || ""
         );
     } catch (err: any) {
         return new NextResponse(`Webhook Error: ${err.message}`, {
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
                 stripeSubscribeId: subscription.id,
             },
             data: {
-                stripeDurationTime: new Date(subscription.current_period_end * 1000),
+                stripeDurationTime: new Date(subscription.current_period_end*1000),
                 stripePriceValue: subscription.items.data[0].price.id,
             },
         });
