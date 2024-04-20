@@ -54,9 +54,11 @@ export async function GET(){
             }
         ],
         metadata: {
-            userId
-        }
-    })
+            userId,
+        },
+    });
+    // return stripe session url to webhook
+    return new NextResponse(JSON.stringify({ url: stripeSession.url }), { status: 200 });
 
 }catch (error) {
     console.log('[STRIPE_ERROR]', error);
