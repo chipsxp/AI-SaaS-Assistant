@@ -8,6 +8,9 @@ introduction page design. Once registered or login, will route you to dashboard
 interface. Using Nextjs and Chakra UI for web UI. Working through OpenAI and Stripe
 API for AI functions and subscriptions.
 
+# Thank you to Alex Burton
+I like to say a thank you to Alex, my friend, and following his GitHub at https://github.com/Burtonia, for helping with the quotes to ticks problem. Under lib folder, in the utils.ts file, Alex discovered that I used quotes and brought to my attention I should use ticks. All works flawlessly in Stripe. Thanks, Alex.
+
 ## Web server deployment
 After testing and final UI design, will deploy on a cPanel web server SSL and a non-cPanel
 web server SSL for performance and compatibility. Try testing on an Atlantic web server
