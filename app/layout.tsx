@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { cn } from '@/lib/utils'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ModalProvider } from '@/components/modal-provider'
 
@@ -11,7 +12,6 @@ export const metadata: Metadata = {
   description: 'Generated AI Power Productivity App',
 }
 
-
 export default function RootLayout({
   children,
 }: {
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={cn("bg-secondary", inter.className)}>
           <ModalProvider />
             {children}
           </body>
