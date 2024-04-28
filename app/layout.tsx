@@ -8,7 +8,7 @@ import { ModalProvider } from "@/components/modal-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AI Saas Controller",
+  title: "AI Personal Data Assistance",
   description: "Generated AI Power Productivity App",
 };
 
