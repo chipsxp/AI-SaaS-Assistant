@@ -15,9 +15,9 @@ export async function GET() {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const subscription = await prismadb.userProSubsribe.findUnique({
+    const subscription = await prismadb.userProSubscribe.findUnique({
       where: {
-        userID: userId,
+        userId,
       },
     });
 
@@ -35,7 +35,7 @@ export async function GET() {
     const stripeSession = await stripe.checkout.sessions.create({
       success_url: mainappSettings,
       cancel_url: mainappSettings,
-      payment_method_types: ["card"],
+      payment_method_types: ["card", "paypal", "cashapp"],
       mode: "subscription",
       billing_address_collection: "auto",
       customer_email: user.emailAddresses[0].emailAddress,
@@ -59,6 +59,7 @@ export async function GET() {
         userId,
       },
     });
+
     // return stripe session url to webhook
     return new NextResponse(JSON.stringify({ url: stripeSession.url }), {
       status: 200,

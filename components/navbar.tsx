@@ -1,4 +1,5 @@
 // components/navbar.tsx
+
 import { UserButton } from "@clerk/nextjs";
 import MobileSideBar from "@/components/mobile-sidebar";
 import { getTrailCount } from "@/lib/trialcounts";

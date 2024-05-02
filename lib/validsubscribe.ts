@@ -1,8 +1,6 @@
 import { auth } from "@clerk/nextjs";
 import prismadb from "@/lib/prismadb";
 
-const MS_IN_DAY = 1000 * 60 * 60 * 24;
-
 export const validSubscribe = async () => {
   const { userId } = auth();
 
@@ -10,9 +8,9 @@ export const validSubscribe = async () => {
     return false;
   }
 
-  const checkSubscription = await prismadb.userProSubsribe.findUnique({
+  const checkSubscription = await prismadb.userProSubscribe.findUnique({
     where: {
-      buyerId: userId,
+      userId,
     },
     select: {
       stripeCustomerId: true,
@@ -28,7 +26,7 @@ export const validSubscribe = async () => {
 
   const isValid =
     checkSubscription.stripePriceValue &&
-    checkSubscription.stripeDurationTime?.getTime() + MS_IN_DAY > Date.now();
+    checkSubscription.stripeDurationTime.getTime() > Date.now();
 
   return !!isValid;
 };
