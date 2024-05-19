@@ -69,7 +69,7 @@ interface SidebarProps {
   apiLimitCount: number;
 }
 
-export const SideBar = ({ apiLimitCount = 0 }: { apiLimitCount: number }) => {
+export const SideBar = ({ apiLimitCount = 0 }: SidebarProps) => {
   const highLighter = usePathname();
 
   return (

@@ -31,7 +31,7 @@ export const SubscribeUser: FC<SubscribeUserProps> = ({ isPro = boolean }) => {
       className="w-1/3"
       onClick={onSubscribe}
     >
-      {isPro ? "Manage Subscription" : "Upgrade to Pro"}
+      {isPro ? "Upgrade to Pro" : "Mangage Subscription"}
       {!isPro && <Zap className="w-4 h-4 ml-2 fill-sky-700" />}
     </Button>
   );

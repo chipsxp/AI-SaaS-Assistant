@@ -11,7 +11,7 @@ datasource db {
   relationMode = "prisma"
 }
   
-model UserApiLimit {
+model userApiLimit {
   id String @id @default(cuid())
   userId String @unique
   count Int @default(0)
@@ -19,7 +19,7 @@ model UserApiLimit {
   updateAt DateTime @updatedAt
 }
 
-model UserProSubscribe {
+model userProSubscribe {
   id String @id @default(cuid())
   userId String @unique
   stripeCustomerId String? @unique @map(name:"stripe_customer_id") 

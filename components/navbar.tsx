@@ -10,7 +10,7 @@ const Navbar = async () => {
     <div className="flex items-center">
       <MobileSideBar apiLimitCount={trialLimitCount} />
       <div className="flex w-full justify-end">
-        <h1 className="text-lg text-black">AI PDA User</h1>
+        <h1 className="text-md text-black">PDA User</h1>
         <UserButton afterSignOutUrl="/" />
       </div>
     </div>
