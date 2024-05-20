@@ -1,38 +1,40 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { Menu } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { SideBar } from '@/components/sidebar';
-import { useEffect, useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { SideBar } from "@/components/sidebar";
+import { useEffect, useState } from "react";
 
 interface MobileSideBarProps {
-    apiLimitCount: number
+  apiLimitCount: number;
+  isPro: boolean;
 }
 
+const MobileSideBar = ({
+  apiLimitCount = 0,
+  isPro = false,
+}: MobileSideBarProps) => {
+  const [isMounted, setIsMounted] = useState(false);
 
-const MobileSideBar = ({apiLimitCount}: MobileSideBarProps) => {
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-    const [isMounted, setIsMounted] = useState(false);
+  if (!isMounted) return null;
 
-    useEffect(() => {
-        setIsMounted(true);
-    },[]);
- 
-    if(!isMounted) return null;
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant={"ghost"} size={"icon"} className="md:hidden">
+          <Menu />
+        </Button>
+      </SheetTrigger>
+      <SheetContent side={"left"} className="p-0">
+        <SideBar isPro={isPro} apiLimitCount={apiLimitCount} />
+      </SheetContent>
+    </Sheet>
+  );
+};
 
-    return (
-        <Sheet>
-            <SheetTrigger asChild>
-                <Button variant={'ghost'} size={'icon'} className='md:hidden'>
-                    <Menu />
-                </Button>
-            </SheetTrigger>
-            <SheetContent side={'left'} className='p-0'>
-                <SideBar apiLimitCount={apiLimitCount} />
-            </SheetContent>
-        </Sheet>
-    )
-}
-
-export default MobileSideBar
+export default MobileSideBar;

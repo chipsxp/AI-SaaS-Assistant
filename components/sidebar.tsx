@@ -67,9 +67,10 @@ const routes = [
 
 interface SidebarProps {
   apiLimitCount: number;
+  isPro?: boolean;
 }
 
-export const SideBar = ({ apiLimitCount = 0 }: SidebarProps) => {
+export const SideBar = ({ apiLimitCount = 0, isPro = false }: SidebarProps) => {
   const highLighter = usePathname();
 
   return (
@@ -103,7 +104,7 @@ export const SideBar = ({ apiLimitCount = 0 }: SidebarProps) => {
           ))}
         </div>
       </div>
-      <TrialCounter apiLimitCount={apiLimitCount} />
+      <TrialCounter isPro={isPro} apiLimitCount={apiLimitCount} />
     </div>
   );
 };

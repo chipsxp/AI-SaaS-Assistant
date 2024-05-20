@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { addTrialCount, checkTrialLimit } from "@/lib/trialcounts";
+import { validSubscribe } from "@/lib/validsubscribe";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // This is also the default, can be omitted
@@ -26,7 +27,8 @@ export async function POST(req: Request) {
     }
 
     const freeTrail = await checkTrialLimit();
-    if (!freeTrail) {
+    const isPro = await validSubscribe();
+    if (!freeTrail && !isPro) {
       return new NextResponse("Trial limit reached", { status: 403 });
     }
 
@@ -35,7 +37,9 @@ export async function POST(req: Request) {
       messages,
     });
 
-    await addTrialCount();
+    if (!isPro) {
+      await addTrialCount();
+    }
 
     return NextResponse.json(chatCompletion.choices[0].message);
   } catch (error) {

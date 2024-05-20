@@ -10,9 +10,13 @@ import { useProModalPopup } from "@/hooks/pro-modal-popup";
 
 type TrailCounterProps = {
   apiLimitCount?: number;
+  isPro?: boolean;
 };
 
-export const TrialCounter = ({ apiLimitCount = 0 }: TrailCounterProps) => {
+export const TrialCounter = ({
+  apiLimitCount = 0,
+  isPro = false,
+}: TrailCounterProps) => {
   const proModal = useProModalPopup();
   const [mounted, setMounted] = useState(false);
 
@@ -21,6 +25,10 @@ export const TrialCounter = ({ apiLimitCount = 0 }: TrailCounterProps) => {
   }, []);
 
   if (!mounted) {
+    return null;
+  }
+
+  if (isPro) {
     return null;
   }
 

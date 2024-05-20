@@ -1,6 +1,8 @@
 import { auth } from "@clerk/nextjs";
 import prismadb from "@/lib/prismadb";
 
+const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
+
 export const validSubscribe = async () => {
   const { userId } = auth();
 
@@ -26,7 +28,8 @@ export const validSubscribe = async () => {
 
   const isValid =
     checkSubscription.stripePriceValue &&
-    checkSubscription.stripeDurationTime.getTime() > Date.now();
+    checkSubscription.stripeDurationTime?.getTime() + DAY_IN_MILLISECONDS >
+      Date.now();
 
   return !!isValid;
 };

@@ -22,17 +22,17 @@ export async function GET() {
     });
 
     if (subscription && subscription.stripeCustomerId) {
-      const customer = await stripe.billingPortal.sessions.create({
+      const customerSession = await stripe.billingPortal.sessions.create({
         customer: subscription.stripeCustomerId,
         return_url: mainappSettings,
       });
 
-      return new NextResponse(JSON.stringify({ url: customer.url }), {
+      return new NextResponse(JSON.stringify({ url: customerSession.url }), {
         status: 200,
       });
     }
 
-    const stripeSession = await stripe.checkout.sessions.create({
+    const customerSession = await stripe.checkout.sessions.create({
       success_url: mainappSettings,
       cancel_url: mainappSettings,
       payment_method_types: ["card", "paypal", "cashapp"],
@@ -61,7 +61,7 @@ export async function GET() {
     });
 
     // return stripe session url to webhook
-    return new NextResponse(JSON.stringify({ url: stripeSession.url }), {
+    return new NextResponse(JSON.stringify({ url: customerSession.url }), {
       status: 200,
     });
   } catch (error) {
