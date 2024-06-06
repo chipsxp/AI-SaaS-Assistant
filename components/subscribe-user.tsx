@@ -26,11 +26,11 @@ export const SubscribeUser = ({ isPro = false }: SubscribeUserProps) => {
   return (
     <Button
       disabled={loading}
-      variant={isPro ? "default" : "premium"}
+      variant={isPro ? "premium" : "default"}
       className="w-1/3"
       onClick={onSubscribe}
     >
-      {isPro ? "Upgrade to Pro" : "Mangage Subscription"}
+      {isPro ? "Mangage Subscription" : "Upgrade to Pro"}
       {!isPro && <Zap className="w-4 h-4 ml-2 fill-white" />}
     </Button>
   );
