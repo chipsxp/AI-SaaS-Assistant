@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { addTrialCount, checkTrialLimit } from "@/lib/trialcounts";
 import { validSubscribe } from "@/lib/validsubscribe";
