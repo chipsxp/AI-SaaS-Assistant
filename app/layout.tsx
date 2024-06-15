@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/components/modal-provider";
 import { ToasterAlert } from "@/components/toaster-alert";
+import { ChatProvider } from "@/components/chat-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <ChatProvider />
         <body className={cn("bg-secondary", inter.className)}>
           <ModalProvider />
           <ToasterAlert />

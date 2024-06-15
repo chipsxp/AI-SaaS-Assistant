@@ -1,5 +1,5 @@
 "use client";
-
+import toast from "react-hot-toast";
 import * as z from "zod";
 import { useRouter } from "next/navigation";
 import { Heading } from "@/components/heading";
@@ -19,7 +19,6 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 import { useProModalPopup } from "@/hooks/pro-modal-popup";
-import toast from "react-hot-toast";
 
 const ConversationPage = () => {
   const proModal = useProModalPopup();

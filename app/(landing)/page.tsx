@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
+import SplashNavbar from "@/components/splash-navbar";
 const SplashPage = () => {
-    return (
+  return (
     <div>
       <h1 className="text-3xl font-bold underline">
         Landing Splash Page AI Saas!
       </h1>
-    <div>
+      <SplashNavbar />
+      <div>
         <Button asChild>
           <Link href="/sign-up">Register</Link>
         </Button>
@@ -16,7 +17,7 @@ const SplashPage = () => {
         </Button>
       </div>
     </div>
-    )
+  );
 };
 
 export default SplashPage;
