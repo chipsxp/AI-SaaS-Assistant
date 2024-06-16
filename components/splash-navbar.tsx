@@ -15,35 +15,31 @@ export const SplashNavbar = () => {
   const { isSignedIn } = useAuth();
   return (
     <nav className="flex flex-col bg-transparent p-4 items-center justify-between">
-      <Link href="/" className="flex items-center pl-3">
-        <div className="relative w-10 h-10 mr-4">
+      <Link href="/" className="flex items-center">
+        <div className="relative m-4 p-4 flex-row w-16 h-16 mr-8">
           <Image
             fill
             src="/logo.png"
-            alt="logo"
-            width={50}
-            height={50}
-            className="w-8 h-8 rounded-full"
+            alt="check thumbs up"
+            className="w-14 h-14 object-contain"
           />
         </div>
-        <h3
-          className={cn(montserrat.className, "font-bold text-2xl text-white")}
+        <h2
+          className={cn(
+            montserrat.className,
+            "font-bold flex-row text-3xl text-zinc-200"
+          )}
         >
-          AI Assistant
-        </h3>
+          Presenting The Personal AI Office Data Assistant
+        </h2>
       </Link>
-      <Button
-        variant="outline"
-        className="w-full"
-        onClick={() => {
-          if (isSignedIn) {
-            return;
-          }
-          window.location.href = "/sign-in";
-        }}
-      >
-        Sign out
-      </Button>
+      <div className="flex flex-1 mt-4 pt-4 items-center">
+        <Link href={isSignedIn ? "/dashboard" : "/sign-in"}>
+          <Button variant="outline" className="rounded-full">
+            Get Started
+          </Button>
+        </Link>
+      </div>
     </nav>
   );
 };

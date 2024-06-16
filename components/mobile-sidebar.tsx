@@ -27,10 +27,10 @@ const MobileSideBar = ({
     <Sheet>
       <SheetTrigger asChild>
         <Button variant={"ghost"} size={"icon"} className="md:hidden">
-          <Menu />
+          <Menu className="w-10 h-10 bg-zinc-50" />
         </Button>
       </SheetTrigger>
-      <SheetContent side={"left"} className="p-0">
+      <SheetContent side={"left"} className="p-2">
         <SideBar isPro={isPro} apiLimitCount={apiLimitCount} />
       </SheetContent>
     </Sheet>
