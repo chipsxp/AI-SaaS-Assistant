@@ -65,7 +65,7 @@ const DashBoard = () => {
         <h1 className="text-2xl md:text-4xl font-bold text-center">
           AI Personal Data Assistance!
         </h1>
-        <h2 className="text-muted-foreground font-medium text-md md:text-lg text-center">
+        <h2 className="text-muted-foreground font-semibold text-lg md:text-lg text-center">
           Chat with your AI Office Assistant.
         </h2>
       </div>

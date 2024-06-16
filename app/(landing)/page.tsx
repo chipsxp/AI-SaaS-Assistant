@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { SplashNavbar } from "@/components/splash-navbar";
 import { SplashHero } from "@/components/splash-hero";
+import SplashReviews from "@/components/splash-reviews";
 const SplashPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -10,6 +9,7 @@ const SplashPage = () => {
       </h1>
       <SplashNavbar />
       <SplashHero />
+      <SplashReviews />
     </div>
   );
 };

@@ -23,7 +23,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <ChatProvider />
-        <body className={cn("bg-secondary", inter.className)}>
+        <body className={cn("bg-zinc-200", inter.className)}>
           <ModalProvider />
           <ToasterAlert />
           {children}
