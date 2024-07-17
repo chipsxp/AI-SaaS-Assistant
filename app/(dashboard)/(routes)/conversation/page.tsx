@@ -23,9 +23,7 @@ import { useProModalPopup } from "@/hooks/pro-modal-popup";
 const ConversationPage = () => {
   const proModal = useProModalPopup();
   const router = useRouter();
-
   const [messages, setMessages] = useState<OpenAI.ChatCompletionMessage[]>([]);
-
   const form = useForm<z.infer<typeof conversationFormSchema>>({
     resolver: zodResolver(conversationFormSchema),
     defaultValues: {
@@ -45,7 +43,7 @@ const ConversationPage = () => {
       const response = await axios.post("/api/conversation", {
         messages: newMessages,
       });
-      setMessages((current) => [...current, userMessage, ...response.data]);
+      setMessages((current) => [...current, userMessage, response.data]);
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {

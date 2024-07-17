@@ -28,7 +28,6 @@ import { useProModalPopup } from "@/hooks/pro-modal-popup";
 const ImagePage = () => {
   const proModal = useProModalPopup();
   const router = useRouter();
-
   const [images, setImages] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof imageFormSchema>>({
@@ -47,7 +46,11 @@ const ImagePage = () => {
       setImages([]);
       const response = await axios.post("/api/image-generator", formData);
 
+      console.log(response.data);
+
       const urls = response.data.map((image: { url: string }) => image.url);
+
+      console.log(urls);
 
       setImages(urls);
 

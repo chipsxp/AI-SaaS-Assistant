@@ -48,7 +48,7 @@ const CodePage = () => {
       const response = await axios.post("/api/code-generator", {
         messages: newMessages,
       });
-      setMessages((current) => [...current, userMessage, ...response.data]);
+      setMessages((current) => [...current, userMessage, response.data]);
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
