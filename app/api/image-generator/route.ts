@@ -50,7 +50,7 @@ export async function POST(req: Request) {
       await addTrialCount();
     }
 
-    return NextResponse.json(imageCompletion.data[0].url);
+    return NextResponse.json(imageCompletion.data);
   } catch (error) {
     console.log(error, ["IMAGE ERROR"]);
     return new NextResponse("Internal Error", { status: 500 });
