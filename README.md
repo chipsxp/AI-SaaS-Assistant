@@ -24,6 +24,6 @@ with Ubuntu and Comodo SSL.
 
 June 16, 2024, completed the AI Office Assisstant components and API routes. Still need the footer with links to company trust pages like About Us and continuing projects. An idea to add Prompt Engineering templates with prompt examples and result output to a Link at footer.
 
-# Upadted App to latest Nextjs, Aiven, OpenAI, Clerk, Prisma, and Stripe
+# Upadated App to latest Nextjs, Aiven, OpenAI, Clerk, Prisma, and Stripe
 
 Thanks to their online documents, lots of searching, and some hair pulling, was able to update each one to Corepack 2.0 standards. Use npm-check-updates and ncu to update packages and corepack.
