@@ -50,6 +50,15 @@ const MusicSoundPage = () => {
     }
   };
 
+  const handleAudioError = (e: React.SyntheticEvent<HTMLAudioElement, Event>) => {
+    const audioElement = e.target as HTMLAudioElement;
+    const errorMessage = audioElement.error
+      ? `Audio playback error: ${audioElement.error.message}`
+      : "Unknown audio playback error";
+    console.error("Audio playback error:", errorMessage);
+    toast.error(errorMessage);
+  };
+
   return (
     <div>
       <Heading
@@ -100,7 +109,7 @@ const MusicSoundPage = () => {
         )}
         {music && !isLoading && <Empty label="No music or sound generated" />}
         {music && (
-          <audio controls className="w-full mt-8">
+          <audio controls className="w-full mt-8" onError={handleAudioError}>
             <source src={music} type="audio/mp3" />
           </audio>
         )}

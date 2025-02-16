@@ -36,7 +36,9 @@ const VideoMotionPage = () => {
       setVideo(undefined);
 
       const response = await axios.post("/api/video-generator", formData);
-      setVideo(response.data[0]);
+      console.log("API Response:", response.data); // Debug log
+      // LTX-Video returns the video URL in the response
+      setVideo(response.data);
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
@@ -53,8 +55,8 @@ const VideoMotionPage = () => {
   return (
     <div>
       <Heading
-        title="AI Motion Video Generator"
-        description="AI Office Assistant Video Generation"
+        title="AI Video Generator (LTX-Video)"
+        description="Generate high-quality videos using advanced text-to-video technology"
         icon={VideoIcon}
         iconColor="text-orange-700"
         iconBgColor="bg-orange-700/10"
@@ -75,7 +77,7 @@ const VideoMotionPage = () => {
                       className="border-0 outline-none focus-visible:ring-0
                   focus-visible:ring-transparent"
                       disabled={isLoading}
-                      placeholder="A horse galloping through the clouds"
+                      placeholder="A woman with long brown hair walks through a sunlit garden, wearing a flowing white dress. The camera follows her movement smoothly, capturing the gentle sway of flowers in the breeze."
                       {...field}
                     />
                   </FormControl>
@@ -98,13 +100,14 @@ const VideoMotionPage = () => {
             <Loader />
           </div>
         )}
-        {video && !isLoading && <Empty label="No motion video generated" />}
+        {!video && !isLoading && <Empty label="No video generated yet" />}
         {video && (
           <video
             controls
-            className="w-full aspect-video mt-8 rounded-lg border-1 bg-black"
+            className="w-full aspect-video mt-8 rounded-lg border bg-black"
+            src={video}
           >
-            <source src={video} />
+            Your browser does not support the video element.
           </video>
         )}
       </div>

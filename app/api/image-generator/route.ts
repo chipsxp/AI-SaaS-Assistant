@@ -30,7 +30,7 @@ export async function POST(req: Request) {
       return new NextResponse("amount is required", { status: 400 });
     }
 
-    if (!prompt) {
+    if (!resolution) {
       return new NextResponse("resolution is required", { status: 400 });
     }
 

@@ -37,6 +37,7 @@ const ConversationPage = () => {
     try {
       const userMessage: OpenAI.ChatCompletionMessage = {
         role: "assistant",
+        refusal: null,
         content: formData.prompt,
       };
       const newMessages = [...messages, userMessage];

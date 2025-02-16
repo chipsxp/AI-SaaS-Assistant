@@ -10,6 +10,7 @@ const openai = new OpenAI({
 
 const instructionMessage: OpenAI.ChatCompletionMessage = {
   role: "assistant",
+  refusal: "You are not allowed to answer in this way.",
   content:
     "You are a master code developer. You must answer in markdown code snippets only. Use code comments for explanations.",
 };
@@ -39,7 +40,7 @@ export async function POST(req: Request) {
     }
 
     const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o",
       messages: [instructionMessage, ...messages],
     });
 

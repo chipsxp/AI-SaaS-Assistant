@@ -1,7 +1,7 @@
-import * as z from 'zod';
+import * as z from "zod";
 
 export const videoFormSchema = z.object({
-    prompt: z.string().min(1, { 
-        message: 'Describe a video, movie or motion object you want to generate',
+    prompt: z.string().min(50, { 
+        message: 'Please provide a detailed description (at least 50 characters) including scene details, camera movements, and visual elements for better video generation',
      }),
-})
+});
