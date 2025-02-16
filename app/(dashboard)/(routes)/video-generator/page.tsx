@@ -94,7 +94,7 @@ const VideoMotionPage = () => {
           </form>
         </Form>
       </div>
-      <div className="space-y-4 mt-4">
+      <div className="space-y-4 mt-4 px-4 lg:px-8">
         {isLoading && (
           <div className="flex items-center w-full p-8 rounded-lg border">
             <Loader />
@@ -102,13 +102,27 @@ const VideoMotionPage = () => {
         )}
         {!video && !isLoading && <Empty label="No video generated yet" />}
         {video && (
-          <video
-            controls
-            className="w-full aspect-video mt-8 rounded-lg border bg-black"
-            src={video}
-          >
-            Your browser does not support the video element.
-          </video>
+          <div className="space-y-4 max-w-4xl mx-auto">
+            <video
+              controls
+              className="w-full aspect-video mt-8 rounded-lg border bg-black shadow-md"
+              src={video}
+            >
+              Your browser does not support the video element.
+            </video>
+            <div className="flex justify-center">
+              <a
+                href={video}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 bg-orange-700 text-white rounded-md hover:bg-orange-800 transition-colors"
+              >
+                <VideoIcon className="w-4 h-4 mr-2" />
+                Download Video
+              </a>
+            </div>
+          </div>
         )}
       </div>
     </div>

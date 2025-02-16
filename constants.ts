@@ -1,1 +1,1 @@
-export const MAX_FREE_TRIAL_COUNTS = 15;
+export const MAX_FREE_TRIAL_COUNTS = 12;

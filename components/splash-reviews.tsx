@@ -7,11 +7,11 @@ import { CardContent } from "./ui/card";
 const reviews = [
   {
     key: 11,
-    name: "Jim B.",
+    name: "Jimmy B.",
     place: "St. Petersburg, FL",
-    title: "Product Designer",
+    title: "Product Developer",
     review:
-      "I love using the AI Assistant. It's so easy to use and has so many features. I can't recommend it enough!",
+      "I enjoy using the AI Assistant. It's so easy to use and has so many features. I can't recommend it enough!",
   },
   {
     key: 12,
@@ -22,18 +22,19 @@ const reviews = [
   },
   {
     key: 13,
-    name: "Jim B.",
+    name: "Maxwell G.",
     place: "St. Petersburg, FL",
-    title: "Product Designer",
+    title: "Product User",
     review:
-      "I love using the AI Assistant. It's so easy to use and has so many features. I can't recommend it enough!",
+      "It's simple to use the AI Assistant. It's a great tool for my business. Get free credits to start with!",
   },
   {
     key: 14,
-    name: "James B.",
+    name: "Alexander N.",
     place: "St. Petersburg, FL",
-    title: "Product Tester",
-    review: "App looks great and is very user-friendly. I love it!",
+    title: "Product User",
+    review:
+      "The AI Assistant has significantly improved my workflow. It's intuitive and packed with useful features.",
   },
 ];
 

@@ -100,31 +100,49 @@ const ConversationPage = () => {
           </form>
         </Form>
       </div>
-      <div className="space-y-4 mt-4">
+      <div className="max-w-[70rem] ml-4 space-y-4 mt-4 px-4">
         {isLoading && (
-          <div className="flex items-center w-full p-8 rounded-lg border">
+          <div className="flex items-center justify-center w-full p-8">
             <Loader />
           </div>
         )}
         {messages.length === 0 && !isLoading && (
           <Empty label="Start a conversation" />
         )}
-        <div className="flex flex-col-reverse gap-y-4 ">
+        <div className="flex flex-col-reverse gap-y-4">
           {messages.map((message, index) => (
             <div
               key={index}
               className={cn(
-                "w-full p-8 rounded-lg flex items-start gap-x-8",
-                message.role === "assistant"
-                  ? "bg-white border border-zinc-800/10"
-                  : "bg-muted"
+                "flex items-start gap-x-3 py-4 px-4",
+                message.role === "assistant" ? "flex-row-reverse" : "flex-row"
               )}
             >
-              {message.role === "assistant" ? <UserAvatar /> : <BotAvatar />}
-              <p className="text-sm">{message.content}</p>
+              <div className="flex-shrink-0">
+                {message.role === "assistant" ? <UserAvatar /> : <BotAvatar />}
+              </div>
+              <div
+                className={cn(
+                  "p-4 rounded-2xl max-w-[80%] break-words shadow-sm",
+                  message.role === "assistant"
+                    ? "bg-blue-100 text-blue-900 rounded-tr-none"
+                    : "bg-gray-100 text-gray-900 rounded-tl-none"
+                )}
+              >
+                <p className="text-sm whitespace-pre-wrap">
+                  {message.content?.split(/\*\*(.*?)\*\*/).map((part, i) =>
+                    i % 2 === 0 ? (
+                      part
+                    ) : (
+                      <span key={i} className="font-bold">
+                        {part}
+                      </span>
+                    )
+                  ) || message.content}
+                </p>
+              </div>
             </div>
           ))}
-          ;
         </div>
       </div>
     </div>
