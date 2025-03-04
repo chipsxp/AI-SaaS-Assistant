@@ -8,7 +8,7 @@ const mainappSettings = mainappUrl("/settings");
 
 export async function GET() {
   try {
-    const { userId } = auth();
+    const { userId } = await auth();
     const user = await currentUser();
 
     if (!userId || !user) {

@@ -10,7 +10,7 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-    const { userId } = auth();
+    const { userId } = await auth();
     const body = await req.json();
     const { prompt, amount = 1, resolution = "256x256" } = body;
 
@@ -36,6 +36,7 @@ export async function POST(req: Request) {
 
     const freeTrail = await checkTrialLimit();
     const isPro = await validSubscribe();
+    
     if (!freeTrail && !isPro) {
       return new NextResponse("Trial limit reached", { status: 403 });
     }
@@ -52,7 +53,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(imageCompletion.data);
   } catch (error) {
-    console.log(error, ["IMAGE ERROR"]);
+    console.error("IMAGE ERROR:", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

@@ -10,7 +10,7 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-    const { userId } = auth();
+    const { userId } = await auth();
     const body = await req.json();
     const { messages } = body;
 
@@ -28,13 +28,14 @@ export async function POST(req: Request) {
 
     const freeTrail = await checkTrialLimit();
     const isPro = await validSubscribe();
+    
     if (!freeTrail && !isPro) {
       return new NextResponse("Trial limit reached", { status: 403 });
     }
 
     const chatCompletion = await openai.chat.completions.create({
       model: "gpt-4o",
-      messages,
+      messages: messages,
     });
 
     if (!isPro) {
@@ -43,7 +44,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(chatCompletion.choices[0].message);
   } catch (error) {
-    console.log(error, ["CONVERSATION ERROR"]);
+    console.error("CONVERSATION ERROR:", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

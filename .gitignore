@@ -110,8 +110,9 @@ dist
 # FuseBox cache
 .fusebox/
 
-# DynamoDB Local files
+# DynamoDB and Prisma Migrations Debugging Local files
 .dynamodb/
+prisma/migrations
 
 # TernJS port file
 .tern-port

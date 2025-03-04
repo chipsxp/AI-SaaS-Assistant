@@ -20,10 +20,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      afterSignOutUrl="/"
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <html lang="en">
         <ChatProvider />
-        <body className={cn("bg-zinc-200", inter.className)}>
+        <body className={cn("bg-[#d5d9e2]", inter.className)}>
           <ModalProvider />
           <ToasterAlert />
           {children}

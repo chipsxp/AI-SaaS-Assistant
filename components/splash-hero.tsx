@@ -7,12 +7,12 @@ import Link from "next/link";
 export const SplashHero = () => {
   const { isSignedIn } = useAuth();
   return (
-    <div className="text-white font-bold py-8 text-center space-y-5">
-      <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold space-y-5">
+    <div className="text-white font-bold py-10 text-center space-y-8 container mx-auto mb-8">
+      <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold space-y-6">
         <div
           className="
         text-transparent 
-        py-6
+        py-2
         bg-clip-text 
         bg-gradient-to-r from-pink-500 to-violet-500
         "
@@ -41,18 +41,17 @@ export const SplashHero = () => {
         <div className="text-sm md:text-xl font-medium text-zinc-400">
           Create content for the office using AI PDA
         </div>
-        <div>
-          <Link href={isSignedIn ? "/dashboard" : "/sign-in"}>
-            <Button
-              variant="premium"
-              className="md:text-lg p-4 md:p-6 rounded-full font-semibold"
-            >
-              Start Generating For Free
-            </Button>
-          </Link>
-        </div>
       </div>
-      <div className="text-sm md:text-xl font-medium text-zinc-400">
+      <div className="mt-8">
+        <Link href={isSignedIn ? "/dashboard" : "/sign-in"}>
+          <Button
+            className="rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white hover:opacity-90 font-semibold px-8 py-4 text-lg md:text-xl"
+          >
+            Start Generating For Free
+          </Button>
+        </Link>
+      </div>
+      <div className="text-sm md:text-xl font-medium text-zinc-400 mt-4">
         Credit Card Not Required until Purchase Subscription
       </div>
     </div>

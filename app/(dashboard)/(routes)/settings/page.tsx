@@ -5,6 +5,8 @@ import { Settings } from "lucide-react";
 
 const SettingsPage = async () => {
   const isPro = await validSubscribe();
+  // After isPro grabs boolean value of user subscription, it is passed to the SubscribeUser components
+  // to display the correct subscription status.
   return (
     <div>
       <Heading

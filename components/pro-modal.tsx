@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useProModalPopup } from "@/hooks/pro-modal-popup";
+import { useAuth } from "@clerk/nextjs";
 import {
   MessageSquare,
   ImageIcon,
@@ -18,6 +19,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogPortal,
+  DialogOverlay,
 } from "./ui/dialog";
 import { Badge } from "./ui/badge";
 import { Card } from "./ui/card";
@@ -59,11 +62,17 @@ const tools = [
 export const ProModal = () => {
   const useModal = useProModalPopup();
   const [loading, setLoading] = useState(false);
+  const { getToken } = useAuth();
 
   const onSubscribe = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/stripe");
+      const token = await getToken();
+      const response = await axios.get("/api/stripe", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       window.location.href = response.data.url;
     } catch (error) {
       console.log(error, "STRIPE_CLIENT_ERROR");
@@ -74,7 +83,9 @@ export const ProModal = () => {
 
   return (
     <Dialog open={useModal.isOpen} onOpenChange={useModal.onClose}>
-      <DialogContent>
+      <DialogPortal>
+        <DialogOverlay />
+        <DialogContent>
         <DialogHeader>
           <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2 text-center ">
             <div className="flex items-center gap-x-2 font-bold py-2">
@@ -87,7 +98,10 @@ export const ProModal = () => {
               </Badge>
             </div>
           </DialogTitle>
-          <DialogDescription className="text-center pt-2 space-y-2 text-zinc-900 font-medium">
+          <DialogDescription className="text-center pt-2 text-zinc-200 font-medium">
+            Access to all AI Assistant features
+          </DialogDescription>
+          <div className="space-y-2 mt-2">
             {tools.map((tool) => (
               <Card
                 key={tool.label}
@@ -102,7 +116,7 @@ export const ProModal = () => {
                 <Check className="text-primary-500 w-5 h-5 " />
               </Card>
             ))}
-          </DialogDescription>
+          </div>
         </DialogHeader>
         <DialogFooter>
           <Button
@@ -116,7 +130,8 @@ export const ProModal = () => {
             <ZapIcon className="w-4 h-4 ml-2 fill-white" />
           </Button>
         </DialogFooter>
-      </DialogContent>
+        </DialogContent>
+      </DialogPortal>
     </Dialog>
   );
 };

@@ -13,7 +13,7 @@ const Navbar = async () => {
       <MobileSideBar isPro={isPro} apiLimitCount={trialLimitCount} />
       <div className="flex w-full justify-end mr-2 mt-2">
         <h1 className="text-lg text-black px-2">PDA User</h1>
-        <UserButton afterSignOutUrl="/" />
+        <UserButton />
       </div>
     </div>
   );

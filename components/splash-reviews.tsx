@@ -40,16 +40,16 @@ const reviews = [
 
 const SplashReviews = () => {
   return (
-    <div className="px10 pb-10">
-      <h2 className="text-center text-4xl text-zinc-200 font-extrabold mb-10">
+    <div className="container mx-auto px-4 py-4">
+      <h2 className="text-center text-4xl text-zinc-200 font-extrabold mb-12">
         What Our Clients Say
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {reviews.map((item) => (
           <Card
             key={item.name}
-            className="border-blue-500 bg-[#2e2626] text-zinc-200"
+            className="border-blue-500 bg-[#2e2626] text-zinc-200 transform transition-transform hover:scale-105 shadow-lg"
           >
             <CardHeader>
               <CardTitle>{item.name}</CardTitle>
@@ -58,8 +58,8 @@ const SplashReviews = () => {
               </CardDescription>
             </CardHeader>
 
-            <CardContent>{item.review}</CardContent>
-            <CardFooter className="text-zinc-400">{item.place}</CardFooter>
+            <CardContent className="pt-4">{item.review}</CardContent>
+            <CardFooter className="text-zinc-400 pt-2">{item.place}</CardFooter>
           </Card>
         ))}
       </div>

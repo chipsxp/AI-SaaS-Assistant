@@ -24,8 +24,8 @@ model userProSubscribe {
   userId String @unique
   stripeCustomerId String? @unique @map(name:"stripe_customer_id") 
   stripeSubscribeId String? @unique @map(name:"stripe_subscribe_id")
-  stripePriceValue String? @unique @map(name:"stripe_price_id")
-  stripeDurationTime DateTime @unique @map(name:"stripe_duration_time")
+  stripePriceValue Int? @map(name:"stripe_price_id")
+  stripeDurationTime DateTime @map(name:"stripe_duration_time")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

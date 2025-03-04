@@ -84,8 +84,8 @@ const MusicSoundPage = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="rounded-lg border w-full p-4 px-3 md:px-6 
-          focus-within:shadow-sm grid grid-cols-12 gap-2"
+            className="rounded-lg border-[3px] w-full p-4 px-3 md:px-6 
+          focus-within:shadow-sm grid grid-cols-12 gap-6"
           >
             <FormField
               name="prompt"
@@ -93,8 +93,8 @@ const MusicSoundPage = () => {
                 <FormItem className="col-span-12 lg:col-span-10">
                   <FormControl className="m=0 p-0">
                     <Input
-                      className="border-0 outline-none focus-visible:ring-0
-                  focus-visible:ring-transparent"
+                      className="border-2 outline-none focus-visible:ring-2
+                  focus-visible:ring-emerald-500 shadow-sm"
                       disabled={isLoading}
                       placeholder="Jazz guitar BB King"
                       {...field}
@@ -104,11 +104,16 @@ const MusicSoundPage = () => {
               )}
             />
             <Button
-              className="col-span-4 lg:col-span-3 w-full"
+              className="col-span-4 lg:col-span-3 w-full font-semibold shadow-md text-sm md:text-base"
+              variant="premium"
+              size="lg"
               type="submit"
               disabled={isLoading}
             >
-              Generate Response
+              <span className="hidden lg:inline">Generate Response</span>
+              <span className="lg:hidden leading-tight">
+                Generate<br />Response
+              </span>
             </Button>
           </form>
         </Form>

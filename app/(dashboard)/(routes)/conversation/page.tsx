@@ -10,7 +10,8 @@ import { conversationFormSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { TextbookView } from "@/components/textbook-view";
 import axios from "axios";
 import OpenAI from "openai";
 import Empty from "@/components/empty";
@@ -71,8 +72,8 @@ const ConversationPage = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="rounded-lg border w-full p-4 px-3 md:px-6 
-          focus-within:shadow-sm grid grid-cols-12 gap-2"
+            className="rounded-lg border-[3px] w-full p-4 px-3 md:px-6 
+          focus-within:shadow-sm grid grid-cols-12 gap-6"
           >
             <FormField
               name="prompt"
@@ -80,8 +81,8 @@ const ConversationPage = () => {
                 <FormItem className="col-span-12 lg:col-span-10">
                   <FormControl className="m=0 p-0">
                     <Input
-                      className="border-0 outline-none focus-visible:ring-0
-                  focus-visible:ring-transparent"
+                      className="border-2 outline-none focus-visible:ring-2
+                  focus-visible:ring-violet-500 shadow-sm"
                       disabled={isLoading}
                       placeholder="Type a question or ideas here"
                       {...field}
@@ -91,16 +92,21 @@ const ConversationPage = () => {
               )}
             />
             <Button
-              className="col-span-4 lg:col-span-3 w-full"
+              className="col-span-4 lg:col-span-3 w-full font-semibold shadow-md text-sm md:text-base"
+              variant="premium"
+              size="lg"
               type="submit"
               disabled={isLoading}
             >
-              Generate Response
+              <span className="hidden lg:inline">Generate Response</span>
+              <span className="lg:hidden leading-tight">
+                Generate<br />Response
+              </span>
             </Button>
           </form>
         </Form>
       </div>
-      <div className="max-w-[70rem] ml-4 space-y-4 mt-4 px-4">
+      <div className="mt-4">
         {isLoading && (
           <div className="flex items-center justify-center w-full p-8">
             <Loader />
@@ -109,41 +115,7 @@ const ConversationPage = () => {
         {messages.length === 0 && !isLoading && (
           <Empty label="Start a conversation" />
         )}
-        <div className="flex flex-col-reverse gap-y-4">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={cn(
-                "flex items-start gap-x-3 py-4 px-4",
-                message.role === "assistant" ? "flex-row-reverse" : "flex-row"
-              )}
-            >
-              <div className="flex-shrink-0">
-                {message.role === "assistant" ? <UserAvatar /> : <BotAvatar />}
-              </div>
-              <div
-                className={cn(
-                  "p-4 rounded-2xl max-w-[80%] break-words shadow-sm",
-                  message.role === "assistant"
-                    ? "bg-blue-100 text-blue-900 rounded-tr-none"
-                    : "bg-gray-100 text-gray-900 rounded-tl-none"
-                )}
-              >
-                <p className="text-sm whitespace-pre-wrap">
-                  {message.content?.split(/\*\*(.*?)\*\*/).map((part, i) =>
-                    i % 2 === 0 ? (
-                      part
-                    ) : (
-                      <span key={i} className="font-bold">
-                        {part}
-                      </span>
-                    )
-                  ) || message.content}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <TextbookView messages={messages} />
       </div>
     </div>
   );

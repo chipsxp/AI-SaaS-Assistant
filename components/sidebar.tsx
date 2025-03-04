@@ -78,8 +78,14 @@ export const SideBar = ({ apiLimitCount = 0, isPro = false }: SidebarProps) => {
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#222733] text-white">
       <div className="flex-1 px-3 py-2">
         <Link href="/" className="flex items-center pl-3 mb-14">
-          <div className="relative w-10 h-10 mr-4">
-            <Image fill alt="logo" src="/logo.png" />
+          <div className="relative w-8 h-8 mr-4">
+            <Image
+              src="/logo.png"
+              alt="logo"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
           </div>
           <h3 className={cn(montserrat.className, "font-bold text-2xl")}>
             AI PDA Control
