@@ -35,7 +35,7 @@ export async function GET() {
     const customerSession = await stripe.checkout.sessions.create({
       success_url: mainappSettings,
       cancel_url: mainappSettings,
-      payment_method_types: ["card", "paypal", "cashapp"],
+      payment_method_types: ["card"],
       mode: "subscription",
       billing_address_collection: "auto",
       customer_email: user.emailAddresses[0].emailAddress,
