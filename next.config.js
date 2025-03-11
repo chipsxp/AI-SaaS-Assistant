@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  distDir: "aipda",
   images: {
     remotePatterns: [
       {
@@ -20,8 +21,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/proxy/:path*',
-        destination: 'https://replicate.delivery/:path*',
+        source: "/proxy/:path*",
+        destination: "https://replicate.delivery/:path*",
       },
     ];
   },
