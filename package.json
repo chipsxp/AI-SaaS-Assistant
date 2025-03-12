@@ -21,7 +21,7 @@
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-slot": "^1.1.2",
     "@types/katex": "^0.16.7",
-    "axios": "^1.8.1",
+    "axios": "^1.8.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "crisp-sdk-web": "^1.0.25",
@@ -48,7 +48,6 @@
     "seed": "node prisma/seed.js"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.10.0",
     "@tailwindcss/forms": "latest",
     "@tailwindcss/postcss": "^4.0.9",
     "@tailwindcss/typography": "^0.5.16",
@@ -57,7 +56,6 @@
     "@types/react-dom": "^19.0.4",
     "@types/react-katex": "^3.0.4",
     "autoprefixer": "latest",
-    "netlify-cli": "^19.0.2",
     "postcss": "latest",
     "prisma": "^6.4.1",
     "tailwindcss": "latest",
