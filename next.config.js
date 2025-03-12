@@ -20,7 +20,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/proxy/:path*",
+        source: "/xezq/:path*",
         destination: "https://replicate.delivery/:path*",
       },
     ];
