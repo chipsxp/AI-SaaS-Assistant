@@ -9,6 +9,14 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "api.replicate.com",
+      },
+      {
+        protocol: "https",
+        hostname: "stream.replicate.com",
+      },
+      {
+        protocol: "https",
         hostname: "replicate.delivery",
       },
       {
@@ -20,7 +28,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/xezq/:path*",
+        source: "xezq/:path*",
         destination: "https://replicate.delivery/:path*",
       },
     ];
